@@ -9,6 +9,14 @@ const loadingGif = document.querySelector('.loading');
 const chat = document.querySelector('.chat');
 const userMessageBar = document.querySelector('.user-message-bar');
 
+document.addEventListener("keypress", (e)=> {
+    if(e.key === "Enter") {
+        const btn = document.querySelector("#submit-message");
+
+        btn.click();
+    }
+})
+
 //FUNCTIONS =========================================================
 
 function tryLogin() {
@@ -44,8 +52,7 @@ function loginSucessfully() {
     userMessageBar.classList.remove('hidden');
 
     setInterval(activeUser, 5000)
-    window.scrollTo(0, document.body.scrollHeight)
-
+    
     setInterval(getMessages, 3000)  
     
 
@@ -117,12 +124,13 @@ function sendMessage() {
     const request = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", messageInfo)
 
     request.catch(() => {
-        location.reload();
+        window.location.reload();
     })
 
     // request.then(() =>{
     //     console.log('mensagem enviada');
     // })
-
+    getMessages();
+    
     message.value = "";
 }

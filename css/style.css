@@ -69,10 +69,12 @@ body{
 }
 
 .loading {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .loading p{
     color: #888888;
     margin-left: 7px;
@@ -125,7 +127,10 @@ main {
 
     display: flex;
     align-items: center;
+
     flex-wrap: wrap;    
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     padding: 10px 0 10px 10px;
     line-height: 20px;
@@ -160,8 +165,9 @@ main {
     background-color: white;
     padding: 0 30px;
     box-sizing: border-box;
-
+    
     box-shadow: 1px -4px 5px rgba(0, 0, 0, 0.05);
+    /* background-color: lightcoral; */
 }
 
 .user-message-bar div {
@@ -182,14 +188,19 @@ main {
     font-style: italic;
 }
 
+.user-message-bar button {
+    border: none;
+    background-color: white;
+}
+
 input:focus {
     border: 0 none;
     outline: 0;
 }
 
 .user-message-bar ion-icon{
-    font-size: 30px;
-
+    font-size: 55px;
+    height: 30px;
 }
 
 .hidden {
