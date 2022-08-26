@@ -6,14 +6,13 @@
 
 body{
     font-family: 'Roboto', sans-serif;
-    background-color: #f3f3f3;
     margin-top: 105px;  
+    margin-bottom: 80px;
 }
 
 .login-screen {
-    /* background-color: lightblue; */
-    width: screen;
-    height: screen;
+    width: 100%;
+    background-color: white;
 }
 
 
@@ -108,13 +107,12 @@ header ion-icon {
     font-size: 45px;
 }
 
-
 main {
     width: 100%;
+    background-color: #f3f3f3;
 }
 
 .chat {
-    height: 3500px;
     margin: 20px 0;
     /* background-color: green; */
 }
@@ -136,11 +134,11 @@ main {
     box-sizing: border-box;
 }
 
-.status-message {
+.status {
     background-color: #DCDCDC;
 }
 
-.private-message {
+.private {
     background-color: #FFDEDE;
 }
 
