@@ -9,6 +9,8 @@ const loadingGif = document.querySelector('.loading');
 const chat = document.querySelector('.chat');
 const userMessageBar = document.querySelector('.user-message-bar');
 
+
+// Envio com Enter
 document.addEventListener("keypress", (e)=> {
     if(e.key === "Enter") {
         const btn = document.querySelector("#submit-message");
@@ -51,17 +53,25 @@ function loginSucessfully() {
     chat.classList.remove('hidden');
     userMessageBar.classList.remove('hidden');
 
+    // Mantém usuário logado
     setInterval(activeUser, 5000)
     
+    // Atualiza as mensagens
     setInterval(getMessages, 3000)  
-    
 
 }
 
 function activeUser() {
+
+    
     const response = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", user);
+
+    response.catch(()=>{
+        location.reload();
+    })
+
     response.then( (ok) => {
-        // console.log(ok.status)
+        console.log(ok.status)  
     })
 
 }
@@ -74,36 +84,29 @@ function getMessages() {
     })
 
     response.then((messages)=>{
+        chat.innerHTML = ""; // Reseta o conteúdo
         let text;
         let htmlMesssage;
 
         for (const message of messages.data){
-            htmlMesssage = document.createElement("div");
-            htmlMesssage.classList.add("message-container");
 
             switch (message.type) {
-                case "status": {
-                    htmlMesssage.classList.add('status')
-                    text = `${message.text}`
-                };break
-
+                case "status": text = `${message.text}`;break;
                 case "message": text = `para <span class="bold">${message.to}</span>: ${message.text}`;break
-
-                case "private": {
-                    htmlMesssage.classList.add('private')
-                    text = `reservadamente para <span class="bold">${message.to}</span>: ${message.text}`
-                };break
+                case "private":text = `reservadamente para <span class="bold">${message.to}</span>: ${message.text}`;break
             }
 
-            htmlMesssage.innerHTML =
+            htmlMesssage =
             `
-            <div class="message">
-                <span class="time">(${message.time})</span> 
-                <span class="bold name">${message.from} </span>${text}
+            <div class="message-container ${message.type}">
+                <div class="message">
+                    <span class="time">(${message.time})</span> 
+                    <span class="bold name">${message.from} </span>${text}
+                </div>
             </div>
             `
 
-            chat.appendChild(htmlMesssage);
+            chat.innerHTML += htmlMesssage;
             window.scrollTo(0, document.body.scrollHeight)
         }
     });
